@@ -10,43 +10,9 @@ The app uses **OTP verification** to ensure secure authentication and allows use
 
 ![Voting Page](public/images/demo.jpg)
 
----
-
-## 📂 Project Structure  
-
-
-
-
-e-voting-app/
-│
-├── models/              # MongoDB models
-│   ├── User.js          # User schema (with OTP verification support)
-│   └── Vote.js          # Vote schema (stores candidate votes)
-│
-├── node_modules/        # Dependencies (auto-generated)
-│
-├── public/              # Frontend files
-│   ├── index.html       # Home page
-│   ├── login.html       # Login / OTP verification page
-│   ├── results.html     # Results display page
-│   ├── results.js       # Frontend script for fetching results
-│   ├── script.js        # Common frontend logic
-│   ├── styles.css       # Styling
-│   └── voting.html      # Voting page
-│
-├── routes/              # Express routes
-│   ├── auth.js          # Authentication + OTP routes
-│   ├── results.js       # Fetching results
-│   └── vote.js          # Voting routes
-│
-├── .env                 # Environment variables (Mongo URI, OTP secrets, etc.)
-├── package.json         # Project dependencies & scripts
-├── package-lock.json    # Dependency lock file
-├── server.js            # Main Express server entry point
-
-
 
 ---
+
 
 ## ⚙️ Installation & Setup  
 
@@ -81,6 +47,47 @@ npm start
  
 For development (with nodemon):
 npm run dev
+
+
+
+
+
+
+## 📂 Project Structure  
+
+{
+  e-voting-app/
+│
+├── models/              # MongoDB models
+│   ├── User.js          # User schema (with OTP verification support)
+│   └── Vote.js          # Vote schema (stores candidate votes)
+│
+├── node_modules/        # Dependencies (auto-generated)
+│
+├── public/              # Frontend files
+│   ├── index.html       # Home page
+│   ├── login.html       # Login / OTP verification page
+│   ├── results.html     # Results display page
+│   ├── results.js       # Frontend script for fetching results
+│   ├── script.js        # Common frontend logic
+│   ├── styles.css       # Styling
+│   └── voting.html      # Voting page
+│
+├── routes/              # Express routes
+│   ├── auth.js          # Authentication + OTP routes
+│   ├── results.js       # Fetching results
+│   └── vote.js          # Voting routes
+│
+├── .env                 # Environment variables (Mongo URI, OTP secrets, etc.)
+├── package.json         # Project dependencies & scripts
+├── package-lock.json    # Dependency lock file
+├── server.js            # Main Express server entry point
+}
+
+
+
+
+
 
 
 📦 Example package.json
