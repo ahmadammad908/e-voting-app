@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Results - Demo E-Voting</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header class="results-header">
+            <div class="header-content">
+                <h1><i class="fas fa-chart-bar"></i> Live Election Results</h1>
+                <p class="subtitle" style="color: white;">Real-time voting statistics and analytics</p>
+            </div>
+            <div class="header-actions">
+                <div class="last-updated">
+                    <i class="fas fa-sync-alt"></i>
+                    Last updated: <span id="lastUpdated">--:--:--</span>
+                </div>
+                <div class="nav-links">
+                    <a href="/" class="btn btn-outline"><i class="fas fa-home"></i> Home</a>
+                    <a href="/voting" class="btn btn-primary"><i class="fas fa-vote-yea"></i> Vote Now</a>
+                </div>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Summary Cards -->
+            <div class="summary-cards">
+                <div class="summary-card total-votes-card">
+                    <div class="card-icon">
+                        <i class="fas fa-users"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Total Votes</h3>
+                        <div class="number" id="totalVotes">0</div>
+                        <div class="trend">Live Count</div>
+                    </div>
+                </div>
+
+                <div class="summary-card leading-card">
+                    <div class="card-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Leading Candidate</h3>
+                        <div class="number" id="leadingCandidate">--</div>
+                        <div class="trend" id="leadingVotes">0 votes</div>
+                    </div>
+                </div>
+
+                <div class="summary-card turnout-card">
+                    <div class="card-icon">
+                        <i class="fas fa-percentage"></i>
+                    </div>
+                    <div class="card-content">
+                        <h3>Turnout Rate</h3>
+                        <div class="number" id="turnoutRate">0%</div>
+                        <div class="trend">Estimated</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Main Charts Section -->
+            <div class="charts-grid">
+                <!-- Bar Chart -->
+                <div class="chart-container large-chart">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-column"></i> Vote Distribution</h3>
+                        <div class="chart-actions">
+                            <button class="btn-chart active" data-type="bar">Bar</button>
+                            <button class="btn-chart" data-type="pie">Pie</button>
+                            <button class="btn-chart" data-type="doughnut">Doughnut</button>
+                        </div>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="mainChart"></canvas>
+                    </div>
+                </div>
+
+                <!-- Progress Chart -->
+                <div class="chart-container">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-bullseye"></i> Vote Progress</h3>
+                    </div>
+                    <div class="progress-chart">
+                        <div id="progressBars"></div>
+                    </div>
+                </div>
+
+                <!-- Candidate Details -->
+                <div class="chart-container candidate-details">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-user-tie"></i> Candidate Details</h3>
+                    </div>
+                    <div class="candidate-stats" id="candidateDetails">
+                        <!-- Dynamic content will be loaded here -->
+                    </div>
+                </div>
+
+                <!-- Timeline Chart -->
+                <div class="chart-container full-width">
+                    <div class="chart-header">
+                        <h3><i class="fas fa-chart-line"></i> Voting Timeline</h3>
+                    </div>
+                    <div class="chart-wrapper">
+                        <canvas id="timelineChart"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Live Updates Section -->
+            <div class="live-updates">
+                <div class="live-header">
+                    <h3><i class="fas fa-broadcast-tower"></i> Live Updates</h3>
+                    <div class="live-indicator">
+                        <span class="pulse"></span>
+                        LIVE
+                    </div>
+                </div>
+                <div class="updates-list" id="updatesList">
+                    <!-- Updates will be loaded here -->
+                </div>
+            </div>
+        </main>
+
+        <footer class="results-footer">
+            <div class="footer-content">
+                <div class="footer-info">
+                    <p><strong>Demo E-Voting System</strong> - This is a demonstration application for educational purposes only.</p>
+                    <p class="timestamp">Results generated on: <span id="generationTime"></span></p>
+                </div>
+                <button onclick="refreshResults()" class="btn btn-refresh">
+                    <i class="fas fa-sync-alt"></i> Refresh Results
+                </button>
+            </div>
+        </footer>
+    </div>
+
+    <script src="results.js"></script>
+</body>
+</html>

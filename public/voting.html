@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vote - Demo E-Voting</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>🗳️ Cast Your Vote</h1>
+            <div class="user-info">
+                <span id="userEmail"></span>
+                <form action="/logout" method="POST" style="display: inline;">
+                    <button type="submit" class="btn btn-secondary btn-small">Logout</button>
+                </form>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div id="votingSection">
+                <div class="voting-header">
+                    <h2>Select Your Candidate</h2>
+                    <p class="subtitle" style="color: white;">Your vote is confidential and cannot be changed once submitted</p>
+                </div>
+                
+                <div class="candidates">
+                    <div class="candidate-card" data-candidate="Ahmad Ammad">
+                        <div class="candidate-image">
+                            <i class="fas fa-user-tie"></i>
+                        </div>
+                        <div class="candidate-info">
+                            <h3>Ahmad Ammad</h3>
+                            <p class="candidate-bio">Experienced leader with proven track record</p>
+                            <div class="candidate-platform">
+                                <span class="platform-tag">Education</span>
+                                <span class="platform-tag">Economy</span>
+                                <span class="platform-tag">Healthcare</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-vote" onclick="showVoteConfirmation('Ahmad Ammad')">
+                            <i class="fas fa-vote-yea"></i> Vote for Ahmad
+                        </button>
+                    </div>
+                    
+                    <div class="candidate-card" data-candidate="Saad Jawad">
+                        <div class="candidate-image">
+                            <i class="fas fa-user-graduate"></i>
+                        </div>
+                        <div class="candidate-info">
+                            <h3>Saad Jawad</h3>
+                            <p class="candidate-bio">Fresh perspective with innovative solutions</p>
+                            <div class="candidate-platform">
+                                <span class="platform-tag">Technology</span>
+                                <span class="platform-tag">Environment</span>
+                                <span class="platform-tag">Reform</span>
+                            </div>
+                        </div>
+                        <button class="btn btn-vote" onclick="showVoteConfirmation('Saad Jawad')">
+                            <i class="fas fa-vote-yea"></i> Vote for Saad
+                        </button>
+                    </div>
+                </div>
+
+                <div class="voting-instructions">
+                    <div class="instruction-item">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>Your vote is secure and anonymous</span>
+                    </div>
+                    <div class="instruction-item">
+                        <i class="fas fa-exclamation-triangle"></i>
+                        <span>You cannot change your vote after submission</span>
+                    </div>
+                    <div class="instruction-item">
+                        <i class="fas fa-clock"></i>
+                        <span>Voting ends automatically when time expires</span>
+                    </div>
+                </div>
+            </div>
+
+            <div id="votedSection" style="display: none;">
+                <div class="success-message">
+                    <div class="success-icon">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <h2>✅ Vote Successfully Cast!</h2>
+                    <p>Your democratic right has been exercised.</p>
+                    <p>You voted for: <strong id="votedCandidate" class="voted-candidate"></strong></p>
+                    <div class="success-actions">
+                        <a href="./results.html" class="btn btn-primary">
+                            <i class="fas fa-chart-bar"></i> View Live Results
+                        </a>
+                        <a href="/logout" class="btn btn-secondary">
+                            <i class="fas fa-sign-out-alt"></i> Logout
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div id="message" class="message"></div>
+        </main>
+    </div>
+
+    <!-- Vote Confirmation Modal -->
+    <div id="voteModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3><i class="fas fa-exclamation-triangle"></i> Confirm Your Vote</h3>
+                <button class="modal-close" onclick="closeModal()">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="confirmation-content">
+                    <div class="confirmation-icon">
+                        <i class="fas fa-hand-pointer"></i>
+                    </div>
+                    <h4>You are about to vote for:</h4>
+                    <div class="selected-candidate" id="selectedCandidateName"></div>
+                    <p class="warning-text">
+                        <i class="fas fa-exclamation-circle"></i>
+                        This action <strong>cannot be undone</strong>. Once submitted, your vote is final and cannot be changed.
+                    </p>
+                    <div class="confirmation-details">
+                        <div class="detail-item">
+                            <i class="fas fa-user-shield"></i>
+                            <span>Your vote is anonymous and secure</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-clock"></i>
+                            <span>Vote will be recorded immediately</span>
+                        </div>
+                        <div class="detail-item">
+                            <i class="fas fa-ban"></i>
+                            <span>No changes allowed after confirmation</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-cancel" onclick="closeModal()">
+                    <i class="fas fa-arrow-left"></i> Go Back & Review
+                </button>
+                <button class="btn btn-confirm" onclick="confirmVote()">
+                    <i class="fas fa-check"></i> Yes, Confirm My Vote
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

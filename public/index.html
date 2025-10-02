@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Secure E-Voting Platform | Demo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #3498db;
+            --primary-dark: #2980b9;
+            --secondary: #2ecc71;
+            --secondary-dark: #27ae60;
+            --accent: #9b59b6;
+            --danger: #e74c3c;
+            --warning: #f39c12;
+            --dark: #2c3e50;
+            --light: #ecf0f1;
+            --gray: #95a5a6;
+            --white: #ffffff;
+            --shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            --radius: 12px;
+            --transition: all 0.3s ease;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Header Styles */
+        header {
+            background: var(--white);
+            padding: 25px 30px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5em;
+        }
+
+        .logo-text h1 {
+            color: var(--dark);
+            margin-bottom: 5px;
+            font-size: 1.8em;
+        }
+
+        .logo-text p {
+            color: var(--gray);
+            font-size: 0.9em;
+        }
+
+        .warning-badge {
+            background: var(--warning);
+            color: var(--white);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        /* Main Content */
+        .main-content {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .welcome-section {
+            background: var(--white);
+            padding: 50px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary), var(--accent));
+        }
+
+        .welcome-section h2 {
+            color: var(--dark);
+            font-size: 2.5em;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .welcome-section > p {
+            color: var(--gray);
+            font-size: 1.2em;
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Features Grid */
+        .features {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin: 40px 0;
+        }
+
+        .feature {
+            padding: 30px 25px;
+            background: var(--light);
+            border-radius: var(--radius);
+            border-left: 5px solid var(--primary);
+            transition: var(--transition);
+            text-align: left;
+        }
+
+        .feature:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-icon {
+            width: 60px;
+            height: 60px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.5em;
+            margin-bottom: 20px;
+        }
+
+        .feature h3 {
+            color: var(--dark);
+            margin-bottom: 10px;
+            font-size: 1.3em;
+        }
+
+        .feature p {
+            color: var(--gray);
+            font-size: 0.95em;
+        }
+
+        /* Candidates Preview */
+        .candidates-preview {
+            margin: 40px 0;
+            padding: 30px;
+            background: var(--light);
+            border-radius: var(--radius);
+        }
+
+        .candidates-preview h3 {
+            text-align: center;
+            margin-bottom: 25px;
+            font-size: 1.5em;
+            color: var(--dark);
+        }
+
+        .candidate-list {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin: 20px 0;
+            flex-wrap: wrap;
+        }
+
+        .candidate {
+            padding: 20px 30px;
+            background: var(--white);
+            border-radius: var(--radius);
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+            min-width: 220px;
+        }
+
+        .candidate:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .candidate-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--primary), var(--accent));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--white);
+            font-size: 1.2em;
+        }
+
+        .candidate strong {
+            color: var(--dark);
+            font-size: 1.1em;
+        }
+
+        /* Actions */
+        .actions {
+            margin-top: 40px;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 15px 30px;
+            border: none;
+            border-radius: var(--radius);
+            text-decoration: none;
+            font-size: 1.1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: var(--transition);
+        }
+
+        .btn:hover::before {
+            left: 100%;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-secondary {
+            background: var(--light);
+            color: var(--dark);
+            border: 2px solid var(--gray);
+        }
+
+        .btn-secondary:hover {
+            background: var(--gray);
+            color: var(--white);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            margin-top: 30px;
+            text-align: center;
+            color: var(--white);
+            font-size: 0.9em;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.2);
+            border-radius: var(--radius);
+        }
+
+        footer p {
+            max-width: 800px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            header {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+
+            .welcome-section {
+                padding: 30px 20px;
+            }
+
+            .welcome-section h2 {
+                font-size: 2em;
+            }
+
+            .features {
+                grid-template-columns: 1fr;
+            }
+
+            .candidate-list {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .actions {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .btn {
+                width: 100%;
+                max-width: 300px;
+                justify-content: center;
+            }
+        }
+
+        /* Animation for page load */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .welcome-section, .features, .candidates-preview, .actions {
+            animation: fadeInUp 0.6s ease-out;
+        }
+
+        .features {
+            animation-delay: 0.1s;
+        }
+
+        .candidates-preview {
+            animation-delay: 0.2s;
+        }
+
+        .actions {
+            animation-delay: 0.3s;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <div class="logo-icon">
+                    <i class="fas fa-vote-yea"></i>
+                </div>
+                <div class="logo-text">
+                    <h1>Secure E-Voting Platform</h1>
+                    <p>Transparent • Secure • Accessible</p>
+                </div>
+            </div>
+            <div class="warning-badge">
+                <i class="fas fa-exclamation-triangle"></i>
+                DEMO ONLY - NOT FOR REAL ELECTIONS
+            </div>
+        </header>
+
+        <main class="main-content">
+            <div class="welcome-section">
+                <h2>Welcome to Secure E-Voting</h2>
+                <p>A modern, secure, and accessible platform designed to demonstrate the future of digital elections with transparency and integrity.</p>
+                
+                <div class="features">
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-shield-alt"></i>
+                        </div>
+                        <h3>Military-Grade Security</h3>
+                        <p>End-to-end encryption and blockchain technology ensure your vote remains anonymous and tamper-proof.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-user-check"></i>
+                        </div>
+                        <h3>Identity Verification</h3>
+                        <p>Multi-factor authentication and biometric verification prevent fraudulent voting activities.</p>
+                    </div>
+                    <div class="feature">
+                        <div class="feature-icon">
+                            <i class="fas fa-chart-bar"></i>
+                        </div>
+                        <h3>Real-time Analytics</h3>
+                        <p>Live results and comprehensive analytics provide full transparency throughout the election process.</p>
+                    </div>
+                </div>
+
+                <div class="candidates-preview">
+                    <h3>2023 Presidential Candidates</h3>
+                    <div class="candidate-list">
+                        <div class="candidate">
+                            <div class="candidate-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <strong>Ahmad Ammad</strong>
+                        </div>
+                        <div class="candidate">
+                            <div class="candidate-avatar">
+                                <i class="fas fa-user-tie"></i>
+                            </div>
+                            <strong>Saad Jawad</strong>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <a href="/login" class="btn btn-primary">
+                        <i class="fas fa-sign-in-alt"></i>
+                        Begin Voting Process
+                    </a>
+                    <a href="./results.html" class="btn btn-secondary">
+                        <i class="fas fa-chart-line"></i>
+                        View Live Results
+                    </a>
+                </div>
+            </div>
+        </main>
+
+        <footer>
+            <p><strong>Disclaimer:</strong> This is a demonstration application for educational purposes only. It does not implement all security measures required for real elections. Always verify the security protocols of any voting system before use in official elections.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Add some interactive elements
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add hover effects to candidate cards
+            const candidates = document.querySelectorAll('.candidate');
+            candidates.forEach(candidate => {
+                candidate.addEventListener('mouseenter', function() {
+                    this.style.transform = 'translateY(-5px)';
+                    this.style.boxShadow = '0 10px 20px rgba(0, 0, 0, 0.1)';
+                });
+                
+                candidate.addEventListener('mouseleave', function() {
+                    this.style.transform = 'translateY(0)';
+                    this.style.boxShadow = 'none';
+                });
+            });
+            
+            // Add click animation to buttons
+            const buttons = document.querySelectorAll('.btn');
+            buttons.forEach(button => {
+                button.addEventListener('click', function(e) {
+                    // Create ripple effect
+                    const ripple = document.createElement('span');
+                    const rect = this.getBoundingClientRect();
+                    const size = Math.max(rect.width, rect.height);
+                    const x = e.clientX - rect.left - size/2;
+                    const y = e.clientY - rect.top - size/2;
+                    
+                    ripple.style.width = ripple.style.height = size + 'px';
+                    ripple.style.left = x + 'px';
+                    ripple.style.top = y + 'px';
+                    ripple.classList.add('ripple');
+                    
+                    this.appendChild(ripple);
+                    
+                    setTimeout(() => {
+                        ripple.remove();
+                    }, 600);
+                });
+            });
+        });
+    </script>
+</body>
+</html>
