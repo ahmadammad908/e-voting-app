@@ -18,7 +18,7 @@ The app uses **OTP verification** to ensure secure authentication and allows use
 
 ### 1. Clone the repository  
 ```bash
-git clone https://github.com/your-username/e-voting-app.git
+git clone https://github.com/ahmadammad908/e-voting-app.git
 
 e-voting-app
 
